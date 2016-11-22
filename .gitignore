@@ -1,0 +1,13 @@
+# Ignore npm files/folders
+node_modules
+npm-debug.log
+
+# Ignore bower folder
+bower_components
+
+# Ignore built file of webpack
+dist
+
+# Ignore Mac files
+.DS_Store
+.env
