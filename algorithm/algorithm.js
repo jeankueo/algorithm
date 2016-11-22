@@ -62,7 +62,7 @@ function sqrt (p) { // Newton's method
 
 	var err = 1e-15, // decide precision
 		t = p;
-	while (abs(t - p / t) > err * t) {
+	while (abs(t - p / t) > err) {
 		t = (p / t + t) / 2
 	}
 	return t;
