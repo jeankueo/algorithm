@@ -167,3 +167,13 @@ s1e1.e13.transposition = function (input) {
 	});
 	return retVal;
 };
+
+s1e1.e14 = {};
+s1e1.e14.lg = function (iInteger) {
+	var retVal = 0, value = 1;
+	while (value * 2 <= iInteger) {
+		value = value * 2;
+		retVal++;
+	}
+	return retVal;
+};
