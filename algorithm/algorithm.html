@@ -3,6 +3,16 @@
 		<title>algorithm</title>
 	</head>
 	<body>
-		<script src = './algorithm.js'></script>
+		<script>
+			function printArray (aTarget)  {
+				console.log('[' + aTarget.join(', ') + ']');
+			};
+			function printMatrix(aTarget)  {
+				for (var i = 0; i < aTarget.length; i++) {
+					printArray(aTarget[i]);
+				}
+			};
+		</script>
+		<script src = './S1E1.js'></script>
 	</body>
 </html>
