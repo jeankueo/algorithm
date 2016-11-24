@@ -135,12 +135,13 @@ s1e1.e9l = function (p) {// binary represent -- loop
 	return retval;
 };
 
-s1e1.e11 = function () {
-	var input = [
-		[true, false, false],
-		[false, false, true],
-		[true, false, true]
-	];
+s1e1.e11 = {};
+s1e1.e11.input = [
+	[true, false, false],
+	[false, false, true],
+	[true, false, true]
+];
+s1e1.e11.printBoolean = function (input) {
 	input.map(function (row, i) {
 		var log = 'row ' + i + ':[';
 		row.map(function (cell, j) {
@@ -150,3 +151,19 @@ s1e1.e11 = function () {
 	});
 };
 
+s1e1.e13 = {};
+s1e1.e13.input = [
+	[1,1.1,1.2,1.3,1.4],
+	[2,2.1,2.2,2.3,2.4],
+	[3,3.1,3.2,3.3,3.4]
+];
+s1e1.e13.transposition = function (input) {
+	var retVal = [];
+	input.map(function (row, i) {
+		row.map(function (cell, j) {
+			retVal[j] = retVal[j] || [];
+			retVal[j][i] = cell;
+		});
+	});
+	return retVal;
+};
