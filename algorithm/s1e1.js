@@ -81,6 +81,72 @@ s1e1.binarySearch = function (iValue, aSortedArray, vLow, vHigh) {
 	}
 };
 //////////// exercise ////////////////////////////////////////////////////////////////////////////////////////
-s1e1.e113 = function () {
-
+s1e1.e6 = function (f, g) {
+	for (var i = 0; i < 15; i ++) {
+		console.log(f);
+		f = f + g;
+		g = f - g;
+	}
 };
+
+s1e1.e7a = function () {
+	var t = 9;
+	while (this.abs(t - 9/t) > 0.01) { 
+		t = (9/t + t) / 2;
+	}
+	console.log (t); // 与sqre相比精度低了，结果是 3.00009155413138
+};
+
+s1e1.e7b = function () {
+	var sum = 0; 
+	for (var i = 1; i < 1000; i++) {
+		for (var j = 0; j < i; j++) {
+			sum++;
+		}
+	}
+	console.log(sum); //499500
+};
+
+s1e1.e7c = function () {
+	var sum = 0; 
+	for (var i = 1; i < 1000; i *= 2) {  // * 1+9
+		for (var j = 0; j < 1000; j++) { // *1000
+			sum++;
+		}
+	}
+	console.log(sum); // 10000
+};
+
+s1e1.e9r = function (p) { // binary represent -- recursive
+	var d = Math.floor(p / 2),
+		r = p % 2;
+	if (d > 0) {
+		return this.e9r(d)  + '' + r;
+	} else {
+		return '' + r;
+	}
+};
+
+s1e1.e9l = function (p) {// binary represent -- loop
+	var retval = '';
+	for (var i = p; i > 0; i = Math.floor(i / 2) ){
+		retval = (i % 2) + retval;
+	}
+	return retval;
+};
+
+s1e1.e11 = function () {
+	var input = [
+		[true, false, false],
+		[false, false, true],
+		[true, false, true]
+	];
+	input.map(function (row, i) {
+		var log = 'row ' + i + ':[';
+		row.map(function (cell, j) {
+			log += cell ? 'x' : 'o';
+		});
+		console.log(log + ']');
+	});
+};
+
