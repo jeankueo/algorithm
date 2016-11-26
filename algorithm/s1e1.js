@@ -177,3 +177,8 @@ s1e1.e14.lg = function (iInteger) {
 	}
 	return retVal;
 };
+
+s1e1.e15 = {}；
+s1e1.e15.histogram = function (input) {
+	
+};
