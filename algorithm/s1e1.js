@@ -178,7 +178,23 @@ s1e1.e14.lg = function (iInteger) {
 	return retVal;
 };
 
-s1e1.e15 = {}；
-s1e1.e15.histogram = function (input) {
-	
+s1e1.e15 = {};
+s1e1.e15.input1 = [3,5,2,3,2,1,1];
+s1e1.e15.input2 = 10;
+s1e1.e15.histogram = function (aArray, iM) {
+	var retVal = new Array(iM);
+	for (var i = 0; i < iM; i++) {
+		retVal[i] = 0;
+	}
+	aArray.map(function (cell, i) {
+		retVal[cell]++;
+	});
+	return retVal;
 };
+
+s1e1.e16 = function (n) { // 6 => 311361142246
+	if (n <= 0) {
+		return '';
+	}
+	return this.e16(n - 3) + n + this.e16(n - 2) + n;
+}
