@@ -198,3 +198,41 @@ s1e1.e16 = function (n) { // 6 => 311361142246
 	}
 	return this.e16(n - 3) + n + this.e16(n - 2) + n;
 }
+
+s1e1.e17 = function (n) {
+	if (n <= 0) {
+		return "";
+	}
+	var retVal = s1e1.e17(n-3) + n + s1e1.e17(n-2) + n;
+	return retVal;
+}
+
+s1e1.e18 = function (a, b) {
+	if (b === 0) {
+		return 0;
+	}
+	if (b %  2 === 0) {
+		return s1e1.e18(a+a, Math.floor(b/2));
+	}
+	return s1e1.e18(a+a, Math.floor(b/2)) + a;
+}
+// 2,25 +2; 4,12; 8,6; 16,3 +16; 32,1 +32; 64,0; => 50
+// 3,11  +3; 6,5 +6; 12,2; 24,1 +24; 48,0; => 33
+
+s1e1.e19 = function (n, array) {
+	for (var i = 0; i < n; i++) {
+		if (i === 0 || i === 1) {
+			array.push(i);
+		} else {
+			array.push(array[i - 1] + array[i - 2]);
+		}
+	}
+} 
+
+s1e1.e20 = function (n) {
+	if (n === 1) {
+		return Math.log(n, Math.E);
+	} else {
+		return Math.log(n, Math.E) + s1e1.e20(n - 1);
+	}
+}
