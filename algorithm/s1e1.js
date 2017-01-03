@@ -215,7 +215,7 @@ s1e1.e18 = function (a, b) {
 		return s1e1.e18(a+a, Math.floor(b/2));
 	}
 	return s1e1.e18(a+a, Math.floor(b/2)) + a;
-}
+};
 // 2,25 +2; 4,12; 8,6; 16,3 +16; 32,1 +32; 64,0; => 50
 // 3,11  +3; 6,5 +6; 12,2; 24,1 +24; 48,0; => 33
 
@@ -227,12 +227,86 @@ s1e1.e19 = function (n, array) {
 			array.push(array[i - 1] + array[i - 2]);
 		}
 	}
-} 
+};
 
 s1e1.e20 = function (n) {
-	if (n === 1) {
-		return Math.log(n, Math.E);
-	} else {
-		return Math.log(n, Math.E) + s1e1.e20(n - 1);
+	return Math.log(n, Math.E) + (n === 1 ? 0 : s1e1.e20(n - 1));
+};
+
+s1e1.binarySearch2 = function (iValue, aSortedArray, vLow, vHigh, vDepth) {
+	vDepth = vDepth || 1;
+
+	console.log("depth: " + vDepth + "; low: " + vLow + "; high: " + vHigh);
+
+	if (vLow === undefined && vHigh === undefined) {
+		return this.binarySearch2(iValue, aSortedArray, 0, aSortedArray.length - 1, ++vDepth);
 	}
+	if (vLow > vHigh) {
+		return -1;
+	}
+	var iMid = Math.floor(( vLow  +  vHigh ) / 2);
+	if (iValue === aSortedArray[iMid]) {
+		return iMid;
+	} else if (iValue < aSortedArray[iMid]) {
+		return this.binarySearch2(iValue, aSortedArray, vLow, iMid - 1, ++vDepth);
+	} else { // >
+		return this.binarySearch2(iValue, aSortedArray, iMid + 1, vHigh, ++vDepth);
+	}
+};
+
+s1e1.e22 = function () {
+	return s1e1.binarySearch2(3, [1,3,5,5,6,7,9]);
+};
+
+s1e1.e24 = function (p, q, iDepth) {
+	iDepth = iDepth || 1;
+	console.log("p: " + p + "; q:" + q + "; depth: " + iDepth);
+	return q === 0 ? p : s1e1.e24(q, p % q, ++iDepth);
+}
+
+s1e1.e26 = "bubble sorting";
+
+s1e1.e27 = {};
+
+/*
+ * Known:
+ *  1. The change of target happens is dP (value von 0 bis1)
+ *  2. repeat the experiment iN times
+ * Question:
+ *  the chance that target happens iK times is:
+ *  p = C(iK, iN) * dP ^ iK * (1 - dP) ^ (iN - iK)
+ */
+s1e1.e27.i1 = function (iN, iK, dP) {
+	if (iN === 0 && iK === 0) {
+		return 1.0;
+	}
+	if (iN < 0 || iK < 0) {
+		return 0.0;
+	}
+	return (1 - dP) * s1e1.e27.i1(iN - 1, iK, dP) + dP * s1e1.e27.i1(iN - 1, iK - 1, dP);
+}
+
+s1e1.e27.i2 = function (iN, iK, dP) {
+	return s1e1.e27.i21(iK, dP / (1 - dP)) * s1e1.e27.i22(iN, 1 - dP) / s1e1.e27.i23(iN - iK);
+}
+
+s1e1.e27.i21 = function (iK, dX) {
+	if (iK === 0) {
+		return 1.0;
+	}
+	return (dX / iK )  * s1e1.e27.i21(iK - 1, dX);
+}
+
+s1e1.e27.i22 = function (iN, dY) {
+	if (iN === 0) {
+		return 1.0;
+	}
+	return iN * dY * s1e1.e27.i22(iN - 1, dY);
+}
+
+s1e1.e27.i23 = function (iZ) {
+	if (iZ === 0) {
+		return 1.0;
+	}
+	return iZ * s1e1.e27.i23(iZ - 1);
 }
