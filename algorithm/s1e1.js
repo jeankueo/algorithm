@@ -312,6 +312,22 @@ s1e1.e27.i23 = function (iZ) {
 	return iZ * s1e1.e27.i23(iZ - 1);
 }
 
+s1e1.e27.lee = function (iN, iK, dP) {
+	var aRetVal = new Array(iK + 1),
+		aTemp = new Array(iK + 1);
+	aRetVal[0] = 1;
+
+	for (var i = 1; i <= iN; i++) {
+		aTemp[0] = aRetVal[0] * (1 - dP);
+		for (var j = 1; j < aRetVal.length; j++) {
+			aTemp[j] = aRetVal[j - 1] * dP + (aRetVal[j] || 0) * (1 - dP);
+		}
+		aRetVal = aTemp;
+	}
+
+	return aRetVal[iK];	
+}
+
 s1e1.BinarySearch.removeDuplicate = function (aSortedArray) {
 	var iIndex = 0;
 	while (iIndex < aSortedArray.length) {
@@ -331,11 +347,15 @@ s1e1.e28 = function (aSortedArray) {
 }
 
 s1e1.BinarySearch.rank2 = function (iKey, aSortedArray) {
-	
+	var iRetVal = this.rank(iKey, aSortedArray);
+	while (iRetVal > 0 && aSortedArray[iRetVal - 1] === aSortedArray[iRetVal]) {
+		iRetVal--;
+	}
+	return iRetVal;
 }
 
 s1e1.BinarySearch.count = function (iKey, aSortedArray) {
-
+	
 }
 
 s1e1.e29 = function () {
