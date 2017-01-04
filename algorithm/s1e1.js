@@ -63,10 +63,11 @@ s1e1.sqrt = function (p) { // Newton's method
 	}
 	return t;
 };
- 
-s1e1.binarySearch = function (iValue, aSortedArray, vLow, vHigh) {
+
+s1e1.BinarySearch = {};
+s1e1.BinarySearch.rank = function (iValue, aSortedArray, vLow, vHigh) {
 	if (vLow === undefined && vHigh === undefined) {
-		return this.binarySearch(iValue, aSortedArray, 0, aSortedArray.length - 1);
+		return this.rank(iValue, aSortedArray, 0, aSortedArray.length - 1);
 	}
 	if (vLow > vHigh) {
 		return -1;
@@ -75,9 +76,9 @@ s1e1.binarySearch = function (iValue, aSortedArray, vLow, vHigh) {
 	if (iValue === aSortedArray[iMid]) {
 		return iMid;
 	} else if (iValue < aSortedArray[iMid]) {
-		return this.binarySearch(iValue, aSortedArray, vLow, iMid - 1);
+		return this.rank(iValue, aSortedArray, vLow, iMid - 1);
 	} else { // >
-		return this.binarySearch(iValue, aSortedArray, iMid + 1, vHigh);
+		return this.rank(iValue, aSortedArray, iMid + 1, vHigh);
 	}
 };
 //////////// exercise ////////////////////////////////////////////////////////////////////////////////////////
@@ -233,13 +234,13 @@ s1e1.e20 = function (n) {
 	return Math.log(n, Math.E) + (n === 1 ? 0 : s1e1.e20(n - 1));
 };
 
-s1e1.binarySearch2 = function (iValue, aSortedArray, vLow, vHigh, vDepth) {
+s1e1.BinarySearch.rankPrintDepth = function (iValue, aSortedArray, vLow, vHigh, vDepth) {
 	vDepth = vDepth || 1;
 
 	console.log("depth: " + vDepth + "; low: " + vLow + "; high: " + vHigh);
 
 	if (vLow === undefined && vHigh === undefined) {
-		return this.binarySearch2(iValue, aSortedArray, 0, aSortedArray.length - 1, ++vDepth);
+		return this.rankPrintDepth(iValue, aSortedArray, 0, aSortedArray.length - 1, ++vDepth);
 	}
 	if (vLow > vHigh) {
 		return -1;
@@ -248,14 +249,14 @@ s1e1.binarySearch2 = function (iValue, aSortedArray, vLow, vHigh, vDepth) {
 	if (iValue === aSortedArray[iMid]) {
 		return iMid;
 	} else if (iValue < aSortedArray[iMid]) {
-		return this.binarySearch2(iValue, aSortedArray, vLow, iMid - 1, ++vDepth);
-	} else { // >
-		return this.binarySearch2(iValue, aSortedArray, iMid + 1, vHigh, ++vDepth);
+		return this.rankPrintDepth(iValue, aSortedArray, vLow, iMid - 1, ++vDepth);
+	} else {
+		return this.rankPrintDepth(iValue, aSortedArray, iMid + 1, vHigh, ++vDepth);
 	}
 };
 
 s1e1.e22 = function () {
-	return s1e1.binarySearch2(3, [1,3,5,5,6,7,9]);
+	return s1e1.BinarySearch.rankPrintDepth(3, [1,3,5,5,6,7,9]);
 };
 
 s1e1.e24 = function (p, q, iDepth) {
@@ -309,4 +310,34 @@ s1e1.e27.i23 = function (iZ) {
 		return 1.0;
 	}
 	return iZ * s1e1.e27.i23(iZ - 1);
+}
+
+s1e1.BinarySearch.removeDuplicate = function (aSortedArray) {
+	var iIndex = 0;
+	while (iIndex < aSortedArray.length) {
+		var iBinaryIndex = this.rank(aSortedArray[iIndex], aSortedArray);
+		if (iBinaryIndex != iIndex ) {
+			aSortedArray.splice(Math.min(iIndex, iBinaryIndex), Math.abs(iIndex - iBinaryIndex));
+			iIndex = Math.min(iIndex, iBinaryIndex);
+		} else {
+			iIndex++;
+		}
+	}
+	return aSortedArray;
+};
+
+s1e1.e28 = function (aSortedArray) {
+	return s1e1.BinarySearch.removeDuplicate([1,2,2,3,3,3,4,4,4,4]);
+}
+
+s1e1.BinarySearch.rank2 = function (iKey, aSortedArray) {
+	
+}
+
+s1e1.BinarySearch.count = function (iKey, aSortedArray) {
+
+}
+
+s1e1.e29 = function () {
+
 }
