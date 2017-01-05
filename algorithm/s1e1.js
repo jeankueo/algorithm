@@ -318,6 +318,7 @@ s1e1.e27.lee = function (iN, iK, dP) {
 	aRetVal[0] = 1;
 
 	for (var i = 1; i <= iN; i++) {
+		aTemp = new Array(iK + 1);
 		aTemp[0] = aRetVal[0] * (1 - dP);
 		for (var j = 1; j < aRetVal.length; j++) {
 			aTemp[j] = aRetVal[j - 1] * dP + (aRetVal[j] || 0) * (1 - dP);
