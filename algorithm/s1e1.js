@@ -349,8 +349,14 @@ s1e1.e28 = function (aSortedArray) {
 
 s1e1.BinarySearch.rank2 = function (iKey, aSortedArray) {
 	var iRetVal = this.rank(iKey, aSortedArray);
-	while (iRetVal > 0 && aSortedArray[iRetVal - 1] === aSortedArray[iRetVal]) {
-		iRetVal--;
+	if (iRetVal < 0) {
+		return iRetVal;
+	}
+
+	var aTemp = aSortedArray.slice(0, iRetVal);
+	while (aTemp[aTemp.length - 1] === iKey && aTemp.length > 1) {
+		aTemp = aTemp.slice(0, iRetVal);
+		iRetVal = this.rank(iKey, aTemp);
 	}
 	return iRetVal;
 }
