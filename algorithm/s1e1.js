@@ -348,6 +348,10 @@ s1e1.e28 = function (aSortedArray) {
 }
 
 s1e1.BinarySearch.rank2 = function (iKey, aSortedArray) {
+	if (iKey  < aSortedArray[0] ) {
+		return -1;
+	}
+
 	var iRetVal,
 		iTemp = aSortedArray.length,
 		aTemp;
