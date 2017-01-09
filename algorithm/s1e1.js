@@ -348,27 +348,67 @@ s1e1.e28 = function (aSortedArray) {
 }
 
 s1e1.BinarySearch.rank2 = function (iKey, aSortedArray) {
-	if (iKey  < aSortedArray[0] ) {
-		return -1;
+	if (iKey  < aSortedArray[0]) {
+		return 0;
+	}
+
+	if (iKey > aSortedArray[aSortedArray.length - 1]) {
+		return aSortedArray.length;
 	}
 
 	var iRetVal,
 		iTemp = aSortedArray.length,
 		aTemp;
 
-	do {
+	while (iTemp >= 0) {
 		iRetVal = iTemp; 
 		aTemp = aSortedArray.slice(0, iTemp);
 		iTemp = this.rank(iKey, aTemp);
-	} while (iTemp >= 0)
+	} 
 
 	return iRetVal;
 }
 
 s1e1.BinarySearch.count = function (iKey, aSortedArray) {
+	var iTemp = iLow = iHigh = this.rank(iKey, aSortedArray);
+
+	if (iTemp < 0) {
+		return 0;
+	}
 	
+	while (iTemp >= 0) {
+		iLow = iTemp;
+		iTemp = this.rank(iKey, aSortedArray, 0, iTemp - 1);
+	}
+
+	iTemp = iHigh;
+	while (iTemp >= 0 && iTemp <= aSortedArray.length) {
+		iHigh = iTemp;
+		iTemp = this.rank(iKey, aSortedArray, iTemp + 1, aSortedArray.length - 1);
+	}
+
+	return iHigh - iLow + 1;
 }
 
 s1e1.e29 = function () {
+	var aSortedArray;
 
+	aSortedArray = [1,1,1,2,2,2,3,4,5,5];
+	printArray(aSortedArray);
+
+	console.log("rank2(0) expect 0: " + s1e1.BinarySearch.rank2(0, aSortedArray));
+	console.log("rank2(1) expect 0: " + s1e1.BinarySearch.rank2(1, aSortedArray));
+	console.log("rank2(2) expect 3: " + s1e1.BinarySearch.rank2(2, aSortedArray));
+	console.log("rank2(3) expect 6: " + s1e1.BinarySearch.rank2(3, aSortedArray));
+	console.log("rank2(4) expect 7: " + s1e1.BinarySearch.rank2(4, aSortedArray));
+	console.log("rank2(5) expect 8: " + s1e1.BinarySearch.rank2(5, aSortedArray));
+	console.log("rank2(6) expect 10: " + s1e1.BinarySearch.rank2(6, aSortedArray));
+
+	console.log("count(0) expect 0: " + s1e1.BinarySearch.count(0, aSortedArray));
+	console.log("count(1) expect 3: " + s1e1.BinarySearch.count(1, aSortedArray));
+	console.log("count(2) expect 3: " + s1e1.BinarySearch.count(2, aSortedArray));
+	console.log("count(3) expect 1: " + s1e1.BinarySearch.count(3, aSortedArray));
+	console.log("count(4) expect 1: " + s1e1.BinarySearch.count(4, aSortedArray));
+	console.log("count(5) expect 2: " + s1e1.BinarySearch.count(5, aSortedArray));
+	console.log("count(6) expect 0: " + s1e1.BinarySearch.count(6, aSortedArray));
 }
