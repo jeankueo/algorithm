@@ -348,16 +348,16 @@ s1e1.e28 = function (aSortedArray) {
 }
 
 s1e1.BinarySearch.rank2 = function (iKey, aSortedArray) {
-	var iRetVal = this.rank(iKey, aSortedArray);
-	if (iRetVal < 0) {
-		return iRetVal;
-	}
+	var iRetVal,
+		iTemp = aSortedArray.length,
+		aTemp;
 
-	var aTemp = aSortedArray.slice(0, iRetVal);
-	while (aTemp[aTemp.length - 1] === iKey && aTemp.length > 1) {
-		aTemp = aTemp.slice(0, iRetVal);
-		iRetVal = this.rank(iKey, aTemp);
-	}
+	do {
+		iRetVal = iTemp; 
+		aTemp = aSortedArray.slice(0, iTemp);
+		iTemp = this.rank(iKey, aTemp);
+	} while (iTemp >= 0)
+
 	return iRetVal;
 }
 
