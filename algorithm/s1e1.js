@@ -412,3 +412,19 @@ s1e1.e29 = function () {
 	console.log("count(5) expect 2: " + s1e1.BinarySearch.count(5, aSortedArray));
 	console.log("count(6) expect 0: " + s1e1.BinarySearch.count(6, aSortedArray));
 }
+
+s1e1.e30 = function (n) {
+	if (n < 1) {
+		return;
+	}
+
+	var aRetVal = new Array(n);
+	for (var i = 0; i < n; i++) {
+		aRetVal[i] = new Array(n);
+		for (var j = 0; j < n; j++) {
+			aRetVal[i][j] = s1e1.gcd(i, j) > 1;
+		}
+	}
+	return aRetVal;
+}
+
